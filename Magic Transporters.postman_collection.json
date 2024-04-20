@@ -1,0 +1,767 @@
+{
+	"info": {
+		"_postman_id": "e573aeb0-0eaf-4092-a832-0b17abe4fdb3",
+		"name": "Magic Transporters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code===200){\r",
+									"          pm.environment.set('TOKEN',pm.response.json()['data'][\"token\"])\r",
+									" \r",
+									"  pm.environment.set('REFRESH_TOKEN',pm.response.json()['data'][\"refreshToken\"])\r",
+									"    \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Key",
+								"value": "{{API-KEY}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{Accept-Language}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com1\",\r\n    \"password\":\"Test@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code===200){\r",
+									"          pm.environment.set('TOKEN',\"\")\r",
+									"           pm.environment.set('REFRESH_TOKEN',\"\")\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{Accept-Language}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code===200){\r",
+									"          pm.environment.set('TOKEN',pm.response.json()['data'][\"token\"])\r",
+									" \r",
+									"  pm.environment.set('REFRESH_TOKEN',pm.response.json()['data'][\"refreshToken\"])\r",
+									"    \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{Accept-Language}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refreshToken",
+									"value": "{{REFRESH_TOKEN}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/refresh",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Magic Mover",
+			"item": [
+				{
+					"name": "trips",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"first mover in 2024\",\r\n    \"mover_id\":9\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/mover/trip",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"trip"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Api-key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/mover/trip/2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"trip",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"first mover in 2024\",\r\n    \"mover_id\":9\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/admin/projects/3",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"projects",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "fetch my trips",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/mover/trip",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"trip"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "magic items",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"product 1 \",\r\n    \"weight\":19,\r\n    \"trip_id\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/mover/magic-item",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"magic-item"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Api-key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/mover/magic-item/1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"magic-item",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change state",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/mover/trip/change-state?trip_id&mover_id&state",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"mover",
+										"trip",
+										"change-state"
+									],
+									"query": [
+										{
+											"key": "trip_id",
+											"value": null
+										},
+										{
+											"key": "mover_id",
+											"value": null
+										},
+										{
+											"key": "state",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get My mover",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "magic mover",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"weight\": 500,\r\n    \"energy\": 900\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/admin/magic-mover?user_id=3",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"magic-mover"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Api-key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/admin/magic-mover?user_id=3&mover_id=6",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"magic-mover"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "3"
+										},
+										{
+											"key": "mover_id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"weight\": 500,\r\n        \"energy\": 900\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/admin/magic-mover?user_id=3&mover_id=6",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"magic-mover"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "3"
+										},
+										{
+											"key": "mover_id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"Raed Al Masri\",\r\n        \"email\": \"raed.almasri2021101@gmail.com\",\r\n        \"password\": \"qwe123QWE!@#$lskjfops\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/admin/users/2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"Raed Al Masri\",\r\n        \"email\": \"raed.almasri210201@gmail.com\",\r\n        \"password\": \"Test@1234\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/admin/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Api-key",
+										"value": "{{API-KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{Accept-Language}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/admin/users/2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "fetch all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/admin/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "fetch all mover for user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/admin/users/mover-for-user?user_id=2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"mover-for-user"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

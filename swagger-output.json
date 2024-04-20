@@ -1,0 +1,589 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Magic Transporters Api Doc",
+		"description": "Raed Al Masri",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:4000/",
+			"description": "Local development server"
+		},
+		{
+			"url": "https://api.example.net",
+			"description": "Production server"
+		}
+	],
+	"paths": {
+		"_comment1": "Authentication Api",
+		"/auth/": {
+			"post": {
+				"tags": ["Authentication"],
+				"description": "login to the system ",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string",
+										"example": "admin@gmail.com"
+									},
+									"password": {
+										"type": "string",
+										"example": "Test@1234"
+									}
+								},
+								"required": ["email", "password"]
+							},
+							"example": {
+								"email": "admin@gmail.com",
+								"password": "Test@1234"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"token": {
+													"type": "string",
+													"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiJiYWQzNDJkMDk0ZDNlNTk5OWU2MmE5Mjk4ZDc3ZTM1MDlmZmNkNzhjZDkxNjE5ZjQ5ODE1ZGFlMTY1ZGIzY2NjNjgxY2UyYjI4MDRjMTcxM2RiZGVjMjRiOTExNTdmYWY3NmJiMzhlNzEzZTY2MzMwN2ViZTAwZWI0MTdhNTkwZjdiZGJjNGI3NzUyZDFlYTkzMTJhZWYxNjRmYjIyNTkzM2E1YmFiMDRhNjczYWM0MmE4ZDFkM2JjNzdmYmZiZDYyYzdmYmYyYjVmMDIwYmMyZjBmZjdiMTA4OTMzNGNmOCIsImlhdCI6MTcxMzcxNTE1NSwiZXhwIjoxNzEzODAxNTU1fQ.hDdNGsdeirXfJZqJF5tJPrWUJm8lVYUF0sLojIdUfM8"
+												},
+												"refreshToken": {
+													"type": "string",
+													"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiIzYTkwMDU2NjlhN2EyYmZjZmJmNWU5Yjg4YWYyYmQ5M2E4MGRlMGVhNDYwNDcxZjkzNGI0MWM3YWE3MjUzYzNhMDZkZmRhMzFlYzlkNTlmNDUwZjc4MGI0MDJlYWRmMmE0YTRlYjEyM2M2Yjc1ZmE4MjIyZjc1ZTc2MTM1NWJiNSIsImlhdCI6MTcxMjMyNTY2NCwiZXhwIjoxNzI1Mjg1NjY0fQ.YK992v05Dq2v-D6ZJDPR-b4GqnhXxXqV9qAA3gbFXeI"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "The operation was failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "incorrect email"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"schema": {
+					"$ref": "#/components/schemas/login"
+				}
+			}
+		},
+		"/auth/refresh": {
+			"put": {
+				"tags": ["Authentication"],
+				"description": "refresh token to the system ",
+				"parameters": [
+					{
+						"name": "Accept-Language",
+						"in": "header",
+						"description": "Language preference",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"refreshToken": {
+										"type": "string",
+										"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiJiYWQzNDJkMDk0ZDNlNTk5OWU2MmE5Mjk4ZDc3ZTM1MDlmZmNkNzhjZDkxNjE5ZjQ5ODE1ZGFlMTY1ZGIzY2NjNjgxY2UyYjI4MDRjMTcxM2RiZGVjMjRiOTExNTdmYWY3NmJiMzhlNzEzZTY2MzMwN2ViZTAwZWI0MTdhNTkwZjdiZGJjNGI3NzUyZDFlYTkzMTJhZWYxNjRmYjIyNTkzM2E1YmFiMDRhNjczYWM0MmE4ZDFkM2JjNzdmYmZiZDYyYzdmYmYyYjVmMDIwYmMyZjBmZjdiMTA4OTMzNGNmOCIsImlhdCI6MTcxMzcxNTE1NSwiZXhwIjoxNzEzODAxNTU1fQ.hDdNGsdeirXfJZqJF5tJPrWUJm8lVYUF0sLojIdUfM8"
+									}
+								},
+								"required": ["refreshToken"]
+							},
+							"example": {
+								"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiJhMGQ2ZDRkYTA5MmI0ZjhkZTE0MDM1Mjc4MDU5YzcwNSIsImlhdCI6MTcxMTQ1MzMxMiwiZXhwIjoxNzQyNTU3MzEyfQ.lWwVlBSbkaK2x2p0cZarLO4tm5ca-qrjV-skMaoRN18"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"token": {
+													"type": "string",
+													"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiJiYWQzNDJkMDk0ZDNlNTk5OWU2MmE5Mjk4ZDc3ZTM1MDlmZmNkNzhjZDkxNjE5ZjQ5ODE1ZGFlMTY1ZGIzY2NjNjgxY2UyYjI4MDRjMTcxM2RiZGVjMjRiOTExNTdmYWY3NmJiMzhlNzEzZTY2MzMwN2ViZTAwZWI0MTdhNTkwZjdiZGJjNGI3NzUyZDFlYTkzMTJhZWYxNjRmYjIyNTkzM2E1YmFiMDRhNjczYWM0MmE4ZDFkM2JjNzdmYmZiZDYyYzdmYmYyYjVmMDIwYmMyZjBmZjdiMTA4OTMzNGNmOCIsImlhdCI6MTcxMzcxNTE1NSwiZXhwIjoxNzEzODAxNTU1fQ.hDdNGsdeirXfJZqJF5tJPrWUJm8lVYUF0sLojIdUfM8"
+												},
+												"refreshToken": {
+													"type": "string",
+													"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmNyeXB0ZWQiOiIzYTkwMDU2NjlhN2EyYmZjZmJmNWU5Yjg4YWYyYmQ5M2E4MGRlMGVhNDYwNDcxZjkzNGI0MWM3YWE3MjUzYzNhMDZkZmRhMzFlYzlkNTlmNDUwZjc4MGI0MDJlYWRmMmE0YTRlYjEyM2M2Yjc1ZmE4MjIyZjc1ZTc2MTM1NWJiNSIsImlhdCI6MTcxMjMyNTY2NCwiZXhwIjoxNzI1Mjg1NjY0fQ.YK992v05Dq2v-D6ZJDPR-b4GqnhXxXqV9qAA3gbFXeI"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "The operation was failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Token field is required"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+
+		"_comment3": "Admin",
+		"_comment4": "Admin / Users",
+		"/admin/users/": {
+			"post": {
+				"tags": ["Admin / Users"],
+				"description": "add new user to db",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"name": { "type": "string" },
+									"email": { "type": "string" },
+									"password": { "type": "string" }
+								}
+							},
+							"example": {
+								"name": "Raed Al Masri",
+								"email": "raed.al.masri.it@gmail.com",
+								"password": "Test@1234"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"msg": {
+											"type": "string",
+											"example": "The operation was successful"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "The operation was failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "The entered email already exists"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["Admin / Users"],
+				"description": "fetch all Users in DB",
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"type": "object",
+												"properties": {
+													"id": { "type": "number", "example": 1 },
+													"name": { "type": "string", "example": "مسبح" },
+													"email": { "type": "string", "example": "مسبح" },
+													"role": { "type": "string", "example": "مسبح" }
+												}
+											}
+										}
+									}
+								},
+								"example": {
+									"success": true,
+									"data":{
+										"success": true,
+										"data": [
+											{
+												"id": 1,
+												"name": "Administrator",
+												"email": "admin@gmail.com",
+												"role": "admin"
+											},
+											{
+												"id": 2,
+												"name": "Raed Al Masri",
+												"email": "raed.almasri210201@gmail.com",
+												"role": "mover"
+											}
+										]
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},  
+		"/admin/users/{id}": {
+			"put": {
+				"tags": ["Admin / Users"],
+				"description": "update  user to db",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],  
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"msg": {
+											"type": "string",
+											"example": "The operation was successful"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "The operation was failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "User already exists"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Admin / Users"],
+				"description": "delete  car to db",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "The operation was successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"msg": {
+											"type": "string",
+											"example": "The operation was successful"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "The operation was failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "The user does not exist"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} 
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			},
+			"accept-language": {
+				"type": "string"
+			}
+		},
+		"schemas": {
+			"login": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string",
+						"format": "string",
+						"example": "admin@gmail.com"
+					},
+					"password": {
+						"type": "string",
+						"example": "Test@1234"
+					}
+				}
+			}  	 
+		}
+	},
+
+	"security": [
+		{
+			"bearerAuth": [],
+			"accept-language": []
+		}
+	],
+	"language": "ar"
+}

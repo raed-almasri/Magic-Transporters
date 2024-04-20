@@ -1,0 +1,38 @@
+{
+	"error": {
+		"auth": {
+			"email_incorrect": "Incorrect email",
+			"password_incorrect": "Incorrect password",
+			"not_found_token": "Token field is required",
+			"forbidden_token": "The sent token is incorrect"
+		},
+		"users": {
+			"not_found": "The specified account does not exist",
+			"found": "The entered email already exists"
+		},
+		"car": {
+			"not_found": "The car does not exist",
+			"founded": "The car already exists"
+		},
+		"trip": {
+			"not_found": "The trip does not exist",
+			"founded": "The trip already exists",
+			"another_work": "You cannot change the status of this trip because there is another trip on the same vehicle",
+			"failed": "You cannot change the vehicle's status to a previous status",
+			"must_change_state": "The current status of the vehicle is the same as the sent status. Please perform the status change operation and then try again"
+		},
+		"item": {
+			"bigger_size": "The entered item size is larger than the remaining capacity",
+			"founded": "The item already exists in the same trip",
+			"full": "The trip is full, no new item can be added",
+			"not_found": "The specified item does not exist"
+		}
+	},
+	"validation": {
+		"email": "Please confirm the email and try again from the beginning"
+	},
+	"messages": {
+		"success": "The operation was successful",
+		"failed": ""
+	}
+}
