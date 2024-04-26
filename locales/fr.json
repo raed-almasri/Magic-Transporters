@@ -1,0 +1,38 @@
+{
+	"error": {
+		"auth": {
+			"email_incorrect": "Email incorrect",
+			"password_incorrect": "Mot de passe incorrect",
+			"not_found_token": "Le champ de token est requis",
+			"forbidden_token": "Le token envoyé est incorrect"
+		},
+		"users": {
+			"not_found": "Le compte spécifié n'existe pas",
+			"found": "L'email saisi existe déjà"
+		},
+		"car": {
+			"not_found": "La voiture n'existe pas",
+			"founded": "La voiture existe déjà"
+		},
+		"trip": {
+			"not_found": "Le voyage n'existe pas",
+			"founded": "Le voyage existe déjà",
+			"another_work": "Vous ne pouvez pas changer le statut de ce voyage car il y a un autre voyage sur le même véhicule",
+			"failed": "Vous ne pouvez pas changer le statut du véhicule à un statut précédent",
+			"must_change_state": "Le statut actuel du véhicule est le même que le statut envoyé. Veuillez effectuer l'opération de changement de statut puis réessayer"
+		},
+		"item": {
+			"bigger_size": "La taille de l'élément saisi est plus grande que la capacité restante",
+			"founded": "L'élément existe déjà dans le même voyage",
+			"full": "Le voyage est plein, aucun nouvel élément ne peut être ajouté",
+			"not_found": "L'élément spécifié n'existe pas"
+		}
+	},
+	"validation": {
+		"email": "Veuillez confirmer l'email puis réessayer"
+	},
+	"messages": {
+		"success": "L'opération a réussi",
+		"failed": ""
+	}
+}
